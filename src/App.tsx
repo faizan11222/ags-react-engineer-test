@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import Navbar from './components/Navbar';
 import GlobalStyle from './globalStyle';
 import Topbar from './components/Topbar';
+import Add from './components/Add';
+import Find from './components/Find';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const Main = styled.main`
   display: grid;
@@ -15,15 +18,20 @@ const Main = styled.main`
 
 const App: FC = () => {
   return (
-    <>
+  
+     <Router>
       <GlobalStyle />
       <Main>
         <Navbar />
         <article>
           <Topbar />
+          <Routes>
+              <Route path="/find" element={<Find />} />
+              <Route path="/add" element={<Add />} />
+          </Routes>
         </article>
       </Main>
-    </>
+      </Router>
   );
 }
 

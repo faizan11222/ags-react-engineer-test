@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import logo from '../../assets/logo.svg';
 import search from '../../assets/search.svg';
 import plus from '../../assets/plus.svg';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 const Nav = styled.nav`
     display: flex;
@@ -28,17 +30,19 @@ const Nav = styled.nav`
 
 const Navbar: FC = () => {
     return (
+
         <Nav>
             <img src={logo} alt="myproducts" />
-            <a href="/find">
+            <Link to="/find">
                 <img src={search} alt="Find a Product" />
                 <span>Find</span>
-            </a>
-            <a href="/add">
+            </Link>
+            <Link to="/add">
                 <img src={plus} alt="Add a Product" />
                 <span>Add</span>
-            </a>
+            </Link>
         </Nav>
+
     )
 }
 
