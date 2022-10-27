@@ -2,10 +2,12 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import avatar from '../../assets/avatar.png';
 import axios from 'axios';
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "antd/dist/antd.css";
 import { Input, Table } from 'antd';
 const { Search } = Input;
+
 
 
 
@@ -29,8 +31,9 @@ const Heading = styled.div`
 
 
 
-let dataSource:any = [];
-  
+
+
+
   const columns = [
     {
       title: 'Product',
@@ -57,18 +60,23 @@ let dataSource:any = [];
   
   
 
-function changeSearch(e:any){
-    console.log(e);
-    const params = {
-        sku: e,
-        brand: e,
-        model:e
-      };
-      axios.get('https://62d7f6869088313935880018.mockapi.io/api/v1/catalogue', {params}).then(result => dataSource=result)
-    }
 
 
 const Find: FC = () => {
+    const [data, setData]=useState([]);
+
+    function changeSearch(e:any){
+        console.log(e);
+        const params = {
+            sku: e,
+            brand: e,
+            model:e
+          };
+          axios.get('https://62d7f6869088313935880018.mockapi.io/api/v1/catalogue', {params}).then(result => setData(result.data))
+        }
+    
+
+
     return (
         <>
         <div className='m-auto'>
@@ -80,7 +88,7 @@ const Find: FC = () => {
       style={{ width: '80%', marginLeft:'10%', marginTop:'50px', marginBottom:'50px' }}
     />
 
-<Table dataSource={dataSource} columns={columns} style={{width:'80%',  marginLeft:'10%'}} pagination={false}/>
+<Table dataSource={data} columns={columns} style={{width:'80%',  marginLeft:'10%'}} pagination={false}/>
     </div>
 
    
